@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ebook to TXT - Quiet Luxury Converter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/ebook-converter/assets/index-ChTnxvdO.js"></script>
+  <link rel="stylesheet" crossorigin href="/ebook-converter/assets/index-BcmfNqVB.css">
+</head>
+<body>
+  <div id="app" class="app-container">
+    <header>
+      <h1>Ebook Converter</h1>
+      <p>Конвертируйте EPUB, MOBI и FB2 в TXT — быстро, приватно, элегантно.</p>
+    </header>
+
+    <main style="width: 100%;">
+      <div id="drop-zone" class="drop-zone">
+        <div class="drop-zone-icon">✦</div>
+        <div class="drop-zone-text">Перетащите файлы сюда или нажмите для выбора</div>
+        <input type="file" id="file-input" multiple accept=".epub,.mobi,.fb2" style="display: none;">
+      </div>
+
+      <div id="file-list" class="file-list">
+        <!-- Файлы появятся здесь -->
+      </div>
+
+      <div id="batch-actions" class="actions" style="display: none;">
+        <button id="convert-all" class="btn-primary">Конвертировать все</button>
+        <button id="download-all" class="btn-primary" style="display: none; background: var(--accent);">Скачать все (ZIP)</button>
+      </div>
+    </main>
+
+    <footer>
+      <p>Все файлы обрабатываются локально. Ваши данные никогда не покидают браузер.</p>
+    </footer>
+  </div>
+
+</body>
+</html>
