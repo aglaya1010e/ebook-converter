@@ -1,26 +1,76 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ebook to TXT - Quiet Luxury Converter</title>
+  <title>Ebook Flow - Органический конвертер</title>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+
   <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-  <div id="app" class="app-container">
+  <!-- Floating Blobs -->
+  <div class="floating-blob blob-1"></div>
+  <div class="floating-blob blob-2"></div>
+
+  <!-- Fixed Controls -->
+  <div class="fixed-controls">
+    <button class="control-btn glass-morphism" id="dark-mode-toggle" aria-label="Переключить тему">
+      <span class="material-symbols-outlined dark-mode-icon">dark_mode</span>
+      <span class="material-symbols-outlined light-mode-icon">light_mode</span>
+    </button>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
     <header>
-      <h1>Ebook Converter</h1>
-      <p>Конвертируйте EPUB, MOBI и FB2 в TXT — быстро, приватно, элегантно.</p>
+      <h1>
+        <span class="material-symbols-outlined leaf-icon">eco</span>
+        Ebook Flow
+      </h1>
+      <p>Гармонизация вашей цифровой библиотеки</p>
     </header>
 
-    <main style="width: 100%;">
-      <div id="drop-zone" class="drop-zone">
-        <div class="drop-zone-icon">✦</div>
-        <div class="drop-zone-text">Перетащите файлы сюда или нажмите для выбора</div>
-        <input type="file" id="file-input" multiple accept=".epub,.mobi,.fb2" style="display: none;">
+    <!-- Tab Navigation -->
+    <nav class="tab-nav glass-morphism">
+      <button class="tab-btn active" data-tab="converter">
+        <span class="material-symbols-outlined tab-icon">auto_stories</span>
+        <span>Конвертер</span>
+      </button>
+      <button class="tab-btn" data-tab="splitter">
+        <span class="material-symbols-outlined tab-icon">content_cut</span>
+        <span>Разделитель</span>
+      </button>
+    </nav>
+
+    <!-- Converter Section -->
+    <main id="converter-section" class="tab-content active">
+      <div class="drop-zone" id="drop-zone">
+        <div class="drop-zone-glow"></div>
+        <div class="drop-zone-content glass-morphism organic-shape">
+          <div class="drop-zone-icon">
+            <span class="material-symbols-outlined">water_drop</span>
+          </div>
+          <h2>Перетащите файлы сюда для преобразования</h2>
+          <div class="format-badges">
+            <span class="format-badge">EPUB</span>
+            <span class="format-badge">MOBI</span>
+            <span class="format-badge">FB2</span>
+          </div>
+          <span class="material-symbols-outlined drop-zone-arrow">expand_more</span>
+          <div class="output-badge">TXT</div>
+          <input type="file" id="file-input" multiple accept=".epub,.mobi,.fb2" style="display: none;">
+        </div>
       </div>
 
       <div id="file-list" class="file-list">
@@ -29,15 +79,68 @@
 
       <div id="batch-actions" class="actions" style="display: none;">
         <button id="convert-all" class="btn-primary">Конвертировать все</button>
-        <button id="download-all" class="btn-primary" style="display: none; background: var(--accent);">Скачать все (ZIP)</button>
       </div>
     </main>
 
+    <!-- Splitter Section -->
+    <main id="splitter-section" class="tab-content" style="display: none;">
+      <div class="drop-zone" id="split-drop-zone">
+        <div class="drop-zone-glow"></div>
+        <div class="drop-zone-content glass-morphism organic-shape">
+          <div class="drop-zone-icon">
+            <span class="material-symbols-outlined">content_cut</span>
+          </div>
+          <h2>Загрузите TXT файл для разделения</h2>
+          <div class="format-badges">
+            <span class="format-badge">TXT</span>
+          </div>
+          <span class="material-symbols-outlined drop-zone-arrow">expand_more</span>
+          <div class="output-badge">Части</div>
+          <input type="file" id="split-file-input" accept=".txt" style="display: none;">
+        </div>
+      </div>
+
+      <div id="split-control" class="split-control glass-morphism" style="display: none;">
+        <div class="split-info">
+          <div class="split-filename"></div>
+          <div class="split-filesize"></div>
+        </div>
+
+        <div class="parts-selector">
+          <label for="parts-slider">Количество частей: <span id="parts-value">2</span></label>
+          <input type="range" id="parts-slider" min="1" max="10" value="2" class="slider">
+          <div class="parts-grid" id="parts-preview">
+            <!-- Visual preview of parts -->
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="split-btn" class="btn-primary">Разделить файл</button>
+        </div>
+      </div>
+
+      <div id="split-results" class="split-results" style="display: none;">
+        <h3>Результат разделения</h3>
+        <div id="split-files-list" class="file-list">
+          <!-- Split files will appear here -->
+        </div>
+        <div class="actions">
+          <button id="download-all-splits" class="btn-primary">Скачать все части</button>
+          <button id="reset-splitter" class="btn-secondary">Загрузить новый файл</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
     <footer>
-      <p>Все файлы обрабатываются локально. Ваши данные никогда не покидают браузер.</p>
+      <div class="security-badge glass-morphism">
+        <span class="material-symbols-outlined">verified_user</span>
+        <p>Естественно безопасно. Только локальная обработка.</p>
+      </div>
     </footer>
   </div>
 
   <script type="module" src="./main.js"></script>
 </body>
+
 </html>
